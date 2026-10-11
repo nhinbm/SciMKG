@@ -1,7 +1,10 @@
 import wikipediaapi
 import time
 import requests
-from Translate import *
+if __package__:
+    from .Translate import baidu_translate
+else:
+    from Translate import baidu_translate
 def get_wikipedia_summary(concept: str, language="en") -> str:
 
     proxies = {
