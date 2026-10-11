@@ -53,7 +53,7 @@ def extractConcepts(filePtah: str,models: list, subject: str, allEntity: set, k=
     # Validation models  default k=5
     candidate = Validation(candidate, models, subject, k,filePtah)
     # Intergration
-    candidate = Intergration(candidate,k,filePtah)
+    candidate = Intergration(candidate,k,filePtah,model_count=len(models))
 
     return candidate
             
@@ -102,7 +102,7 @@ def Extraction(filePtah: str, models: str, subject: str, allEntity: set, k: int)
     results = []
     for timestamp, candidate_set in entity_time_set.items():
         sc_score = [1]*len(candidate_set)
-        max = [1]*len(candidate_set)
+        max = [0]*len(candidate_set)
         prompt = "hello,"
         results.append([timestamp,candidate_set,sc_score,prompt,max])
     print(results)
@@ -252,7 +252,7 @@ def SELF_REFINE(candidate: list, subject: str, models: str, k: int, filePtah:  s
                 for index , i in enumerate(entities_set):
                     if i in entity:
                         sc_score[index] += 1
-                        sc_max[index] +1
+                        sc_max[index] += 1
 
             for index, (i , j) in enumerate(zip(sc_max, max)) :
                 if i > j:
@@ -305,7 +305,7 @@ def SELF_REFINE(candidate: list, subject: str, models: str, k: int, filePtah:  s
         ner_file.close()         
     return results 
 
-def Intergration(candidate: list, k: int, filePtah: str)-> list:
+def Intergration(candidate: list, k: int, filePtah: str, model_count: int, alpha: float = 0.7)-> list:
     # SC_score
     """candidate format
     results.append([timestamp,candidate_set,sc_score,prompt])
@@ -314,18 +314,24 @@ def Intergration(candidate: list, k: int, filePtah: str)-> list:
     timestamp3, entities_set3, sc_score, prompt, max
     ...
     """
+    if k <= 0 or model_count <= 0:
+        raise ValueError("Integration requires positive iteration and model counts")
+    if not 0 <= alpha <= 1:
+        raise ValueError("alpha must be between 0 and 1")
+    total_votes = model_count * k
     results = []
     for timestamp, entities_set, sc_score, prompt, max in candidate:
+        if len(entities_set) != len(sc_score):
+            raise ValueError("Each candidate concept must have one SC score")
         final_entity = set()
         for index, i in enumerate(entities_set):
-            # condition 1
-            SC_ScoreG = (1 / k * k)  * sc_score[index]
+            # Extraction initializes sc_score to 1; only validation votes count.
+            # Equal-weight frequency is this fork's normalization choice.
+            SC_ScoreG = (sc_score[index] - 1) / total_votes
+            if not 0 <= SC_ScoreG <= 1:
+                raise ValueError("SC score is outside the configured validation vote range")
     
-            if SC_ScoreG >= 0.7:
-                final_entity.add(i)
-                
-            # condition 2
-            if max[index] == k:
+            if SC_ScoreG >= alpha:
                 final_entity.add(i)
         results.append([timestamp,final_entity])
         print(f"timestamp: {timestamp} Entities: {final_entity}")
@@ -460,5 +466,3 @@ if __name__ == "__main__":
     ]
     subject = "Physics"
     main(filePathList, subject, models)
-
-    
