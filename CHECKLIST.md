@@ -1,43 +1,53 @@
-# Checklist thực nghiệm: chi phí xây đồ thị SciMKG
+# Checklist
 
-Mục tiêu: đo chi phí xây đồ thị trên một bài học, kiểm tra chất lượng tương ứng và ước lượng khi mở rộng thành đồ thị chung. SciMKG dùng mô hình có sẵn ở chế độ suy luận; không huấn luyện LLM mới.
+## Problem
 
-Các mục dưới đây là kế hoạch, chưa phải kết quả thực nghiệm.
+Theo đánh giá của nhóm, các bước xử lý ngữ nghĩa trong SciMKG phụ thuộc nhiều vào LLM có sẵn: trích xuất, kiểm chứng, bổ sung khái niệm và căn chỉnh ảnh. Phép tích hợp điểm, ghép mốc video và lưu đồ thị được xử lý bằng mã.
 
-## 1. Chuẩn bị
+**Câu hỏi chính: Để xây dựng một đồ thị tri thức chung (global graph) như SciMKG, cần tốn bao nhiêu chi phí API?** Chi phí này cần được xem cùng chất lượng đồ thị thu được.
 
-- [ ] Kiểm tra một mẫu nhỏ của tác giả trước, sau đó một bài tiếng Việt; ghi rõ nếu chỉ chạy vài trích đoạn.
-- [ ] Ghi số đoạn văn bản, ảnh, phút video và tài nguyên còn thiếu. Tách chi phí chuẩn bị dữ liệu khỏi chi phí chạy trên dữ liệu đã chuẩn bị.
-- [ ] Chốt mô hình, số vòng kiểm chứng, ngưỡng tích hợp, cờ ConceptNet/Wikipedia và ngân sách chạy.
+## Experiments
 
-## 2. Ghi chi phí từng bước
+### Ex01: One lesson — Chi phí một bài học
 
-- [ ] Với mỗi lời gọi: lưu bước xử lý, mô hình thực tế, token đầu vào/đầu ra, thời gian, trạng thái và lượt gọi lại; ghi riêng kết quả lấy từ bộ nhớ đệm.
-- [ ] Tổng hợp riêng tiền xử lý, EVIA (E/V/I/A), tạo giải thích, căn chỉnh ảnh, TTS và xuất JSON/RDF. Bước chạy cục bộ vẫn ghi thời gian hoặc chi phí máy.
-- [ ] Tính tiền theo bảng giá của đúng nhà cung cấp, phiên bản và ngày chạy; tính riêng ảnh, âm thanh hoặc token được tính giá khác nếu có. Không suy tiền từ số lượt gọi đơn thuần.
-- [ ] Phân biệt tiền API thực trả, tiền API ước tính và phí thuê bao. Pilot dùng Codex thuê bao không phải phép đo tiền API thực trả; mục thiếu số liệu ghi “chưa đo”.
+- [ ] Chạy một bài học mẫu nhỏ của tác giả; ghi số đoạn văn bản, ảnh và thời lượng video. Nếu chỉ có trích đoạn, báo chi phí đúng phạm vi đó.
+- [ ] Đo số lượt gọi, token đầu vào/đầu ra và thời gian; tách EVIA (E/V/I/A), tạo giải thích, căn chỉnh ảnh và tạo âm thanh. Chi phí tiền xử lý ghi riêng.
+- [ ] Ghi cả lượt gọi lại và kết quả lấy từ bộ nhớ đệm; lưu mô hình/phiên bản, prompt, số vòng, ngưỡng, cờ nguồn ngoài, phiên bản mã và ngày chạy.
+- [ ] Tính tiền theo đơn vị dịch vụ và bảng giá ngày chạy; phân biệt tiền API thực trả với tiền ước tính khi dùng thuê bao.
 
-| Bước | Lượt gọi mới / gọi lại | Token hoặc đơn vị dịch vụ | Thời gian | Chi phí và căn cứ |
-|---|---|---|---|---|
-| Tiền xử lý | — | — | — | — |
-| EVIA: E / V / I / A | — | — | — | — |
-| Tạo giải thích | — | — | — | — |
-| Căn chỉnh ảnh | — | — | — | — |
-| Tạo âm thanh | — | — | — | — |
-| Xuất JSON/RDF | — | — | — | — |
+**Đầu ra:** bảng chi phí từng bước và tổng chi phí cho bài học.
 
-## 3. Chi phí có tương xứng với chất lượng?
+### Ex02: Hiệu quả của từng bước
 
-- [ ] Chuẩn bị nhãn đánh giá trước khi xem dự đoán; tính precision/recall/F1 khi nhãn đủ tin cậy. Nội dung chưa có người đủ chuyên môn duyệt ghi “chưa chấm”.
-- [ ] Kiểm tra một số liên kết khái niệm–ảnh/video và giải thích; đọc lại JSON/RDF để phát hiện liên kết thiếu hoặc sai định danh.
-- [ ] So sánh cấu hình đầy đủ đã chọn với cấu hình tắt verification và cấu hình tắt augmentation. Giữ cùng dữ liệu, mô hình và thiết lập ở các bước chung; ghi riêng cờ nguồn ngoài và mọi thay đổi khác.
-- [ ] Báo cả chất lượng, chi phí và thời gian của từng cấu hình; phân biệt lượt suy luận mới với phép tính lại từ phản hồi đã lưu.
+- [ ] So sánh ba cấu hình: đầy đủ đã chọn, tắt verification, tắt augmentation. Khi tắt verification, dùng ứng viên trích xuất trực tiếp; khi tắt augmentation, ghi rõ cờ ConceptNet/Wikipedia đã tắt.
+- [ ] Giữ cùng dữ liệu, mô hình và tham số ở các bước chung; đo chất lượng, chi phí và thời gian cho mỗi cấu hình.
 
-## 4. Ước lượng đồ thị lớn và khả năng chạy lại
+**Nhãn để đo chất lượng:**
 
-- [ ] Báo chi phí mỗi bài học và mỗi khái niệm được giữ; thêm chi phí mỗi khái niệm đúng khi có nhãn đáng tin cậy.
-- [ ] Ước lượng sơ bộ: chi phí chuẩn bị chung + số bài × chi phí trung bình mỗi bài. Ghi giả định về độ dài, số ảnh, khái niệm trùng và khả năng tái sử dụng kết quả; một mẫu chỉ đủ thăm dò, không đại diện toàn bộ tập.
-- [ ] Lưu phiên bản mã, dữ liệu, prompt, tham số, tên/phiên bản mô hình, ngày chạy và phản hồi trung gian để đối chiếu.
-- [ ] Ghi rõ mô hình thay thế nếu API gốc không còn dùng được. Bản cập nhật mô hình có thể đổi đầu ra; không coi việc chạy bằng mô hình khác là tái lập chính xác cấu hình tác giả.
+- **Trích xuất:** danh sách khái niệm đúng gắn với từng đoạn văn bản; tính precision/recall/F1. Dùng nhãn `Groundtruth` của tác giả cho đúng bài và phạm vi mẫu, sau khi đối chiếu.
+- **Ảnh/video:** người duyệt đánh dấu cặp khái niệm–tài nguyên có liên quan hay không, kèm căn cứ từ hình hoặc nội dung đoạn video; báo tỷ lệ liên kết đúng trong mẫu đã duyệt. Nhãn trích xuất chưa đủ để chấm phần này.
+- **Augmentation:** chấm riêng khái niệm mới về tính đúng và liên quan đến bài, cùng độ chính xác của giải thích; một khái niệm không có trong nhãn trích xuất chưa chắc là sai.
 
-Đầu ra cần có: bảng chi phí từng bước, bảng chất lượng–chi phí giữa các cấu hình và ước lượng mở rộng kèm giả định.
+- [ ] Chốt nhãn trích xuất trước khi xem dự đoán; dùng cùng tiêu chí chấm cho mọi cấu hình. Nhãn do LLM gợi ý cần người hiểu nội dung duyệt; phần chưa đủ chuyên môn xác minh ghi “chưa chấm”.
+
+**Đầu ra:** bảng chất lượng–chi phí và ví dụ cho thấy verification/augmentation có ích hoặc gây lỗi.
+
+### Sau Ex01–Ex02: Ước lượng khi mở rộng
+
+- [ ] Từ cấu hình đã đánh giá, ước lượng chi phí cho nhiều bài; xét độ dài bài, số ảnh, khái niệm trùng và kết quả có thể tái sử dụng.
+- [ ] Ghi giả định và phạm vi ước lượng. Một bài chỉ cho ước lượng thăm dò; cần thêm mẫu để kết luận chi phí toàn tập.
+
+### Ex03 (tùy chọn): Một số bài học tiếng Việt
+
+- [ ] Sau mẫu tác giả, thử vài video bài học tiếng Việt, ưu tiên lịch sử (ví dụ 1–3 bài), có phụ đề/văn bản và ảnh hoặc slide nếu có.
+- [ ] Điều chỉnh prompt, tiêu chí chọn khái niệm và nguồn ngoài theo tiếng Việt/lịch sử; ghi thay đổi so với cấu hình SciMKG.
+- [ ] Người hiểu bài học chuẩn bị nhãn khái niệm theo đoạn và duyệt liên kết tài nguyên, giải thích; sau đó đo chất lượng và chi phí như Ex01–Ex02.
+
+**Đầu ra:** kết luận khả thi trên mẫu nhỏ. Lịch sử đồng thời thay đổi ngôn ngữ và lĩnh vực so với khoa học tự nhiên của SciMKG, nên cần ghi rõ hai thay đổi này.
+
+## Công khai kết quả bằng Weights & Biases
+
+- [ ] Mỗi cấu hình có một lượt chạy W&B, lưu cấu hình, chi phí, thời gian, chỉ số chất lượng và bảng nhãn–dự đoán; đính kèm JSON/RDF và nguồn dữ liệu để đối chiếu.
+- [ ] Đồng bộ kết quả lên dự án đặt chế độ **Public**, kiểm tra link người ngoài xem được và dẫn link trong báo cáo. W&B có thể ghi nhận thực nghiệm suy luận; nhãn và chỉ số cần do nhóm chuẩn bị/tính.
+
+Tham khảo: [ghi dữ liệu và kết quả](https://docs.wandb.ai/guides/track/log/), [quyền xem dự án công khai](https://docs.wandb.ai/guides/hosting/iam/access-management/restricted-projects/).
