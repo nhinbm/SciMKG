@@ -19,18 +19,16 @@ Theo đánh giá của nhóm, các bước xử lý ngữ nghĩa trong SciMKG ph
 
 ### Ex02: Hiệu quả của từng bước
 
+- [ ] Chọn một bài học nhỏ có văn bản đầu vào trong `RawData.zip` và nhãn chuẩn có sẵn trong `Groundtruth.zip` của tác giả ([Zenodo](https://zenodo.org/records/19691725)); chỉ lấy bài được chọn.
+- [ ] Đối chiếu đúng bài và cố định nhãn công bố. Mẫu đã kiểm tra có nhãn theo cả bài học, nên dùng đầy đủ văn bản bài đó để chấm; giữ nhãn riêng khỏi đầu vào mô hình.
 - [ ] So sánh ba cấu hình: đầy đủ đã chọn, tắt verification, tắt augmentation. Khi tắt verification, dùng ứng viên trích xuất trực tiếp; khi tắt augmentation, ghi rõ cờ ConceptNet/Wikipedia đã tắt.
 - [ ] Giữ cùng dữ liệu, mô hình và tham số ở các bước chung; đo chất lượng, chi phí và thời gian cho mỗi cấu hình.
+- [ ] Gộp và loại trùng khái niệm sau Integration, trước Augmentation, theo bài học; tính precision/recall/F1 với cùng nhãn chuẩn. Phép chấm này đánh giá trích xuất–kiểm chứng–tích hợp.
+- [ ] Với Augmentation, ghi chi phí và số khái niệm bổ sung. Chỉ chấm chất lượng bổ sung hoặc căn chỉnh ảnh/video khi có nhãn chuẩn tương ứng; mẫu hiện đã kiểm tra chưa có các nhãn đó.
 
-**Nhãn để đo chất lượng:**
+**Dữ liệu đánh giá:** dùng nhãn chuẩn công bố của tác giả; Ex02 không dùng dữ liệu tiếng Việt hoặc nhãn do nhóm/LLM tự tạo. Đầu ra `_Intergrationner` và đồ thị tác giả sinh ra là kết quả tham chiếu, không tự trở thành nhãn chuẩn.
 
-- **Trích xuất:** danh sách khái niệm đúng gắn với từng đoạn văn bản; tính precision/recall/F1. Dùng nhãn `Groundtruth` của tác giả cho đúng bài và phạm vi mẫu, sau khi đối chiếu.
-- **Ảnh/video:** người duyệt đánh dấu cặp khái niệm–tài nguyên có liên quan hay không, kèm căn cứ từ hình hoặc nội dung đoạn video; báo tỷ lệ liên kết đúng trong mẫu đã duyệt. Nhãn trích xuất chưa đủ để chấm phần này.
-- **Augmentation:** chấm riêng khái niệm mới về tính đúng và liên quan đến bài, cùng độ chính xác của giải thích; một khái niệm không có trong nhãn trích xuất chưa chắc là sai.
-
-- [ ] Chốt nhãn trích xuất trước khi xem dự đoán; dùng cùng tiêu chí chấm cho mọi cấu hình. Nhãn do LLM gợi ý cần người hiểu nội dung duyệt; phần chưa đủ chuyên môn xác minh ghi “chưa chấm”.
-
-**Đầu ra:** bảng chất lượng–chi phí và ví dụ cho thấy verification/augmentation có ích hoặc gây lỗi.
+**Đầu ra:** bảng precision/recall/F1–chi phí cho phần có nhãn chuẩn; ghi rõ chất lượng phần nào chưa đo được.
 
 ### Sau Ex01–Ex02: Ước lượng khi mở rộng
 
