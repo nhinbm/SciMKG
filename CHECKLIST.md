@@ -8,9 +8,14 @@ Theo đánh giá của nhóm, các bước xử lý ngữ nghĩa trong SciMKG ph
 
 ## Experiments
 
+### Chuẩn bị chung cho Ex01 và Ex02
+
+- [ ] Chọn một bài học nhỏ có văn bản đầu vào trong `RawData.zip` và nhãn chuẩn có sẵn trong `Groundtruth.zip` của tác giả ([Zenodo](https://zenodo.org/records/19691725)); chỉ lấy bài được chọn. Ex01 và Ex02 dùng cùng bài mẫu này.
+- [ ] Đối chiếu đúng bài và cố định nhãn công bố. Mẫu đã kiểm tra có nhãn theo cả bài học, nên dùng đầy đủ văn bản bài đó để chấm; giữ nhãn riêng khỏi đầu vào mô hình.
+
 ### Ex01: One lesson — Chi phí một bài học
 
-- [ ] Chạy một bài học mẫu nhỏ của tác giả; ghi số đoạn văn bản, ảnh và thời lượng video. Nếu chỉ có trích đoạn, báo chi phí đúng phạm vi đó.
+- [ ] Chạy đầy đủ bài mẫu chung đã chọn; ghi số đoạn văn bản, ảnh, thời lượng video và tài nguyên còn thiếu.
 - [ ] Đo số lượt gọi, token đầu vào/đầu ra và thời gian; tách EVIA (E/V/I/A), tạo giải thích, căn chỉnh ảnh và tạo âm thanh. Chi phí tiền xử lý ghi riêng.
 - [ ] Ghi cả lượt gọi lại và kết quả lấy từ bộ nhớ đệm; lưu mô hình/phiên bản, prompt, số vòng, ngưỡng, cờ nguồn ngoài, phiên bản mã và ngày chạy.
 - [ ] Tính tiền theo đơn vị dịch vụ và bảng giá ngày chạy; phân biệt tiền API thực trả với tiền ước tính khi dùng thuê bao.
@@ -19,9 +24,7 @@ Theo đánh giá của nhóm, các bước xử lý ngữ nghĩa trong SciMKG ph
 
 ### Ex02: Hiệu quả của từng bước
 
-- [ ] Chọn một bài học nhỏ có văn bản đầu vào trong `RawData.zip` và nhãn chuẩn có sẵn trong `Groundtruth.zip` của tác giả ([Zenodo](https://zenodo.org/records/19691725)); chỉ lấy bài được chọn.
-- [ ] Đối chiếu đúng bài và cố định nhãn công bố. Mẫu đã kiểm tra có nhãn theo cả bài học, nên dùng đầy đủ văn bản bài đó để chấm; giữ nhãn riêng khỏi đầu vào mô hình.
-- [ ] So sánh ba cấu hình: đầy đủ đã chọn, tắt verification, tắt augmentation. Khi tắt verification, dùng ứng viên trích xuất trực tiếp; khi tắt augmentation, ghi rõ cờ ConceptNet/Wikipedia đã tắt.
+- [ ] Trên bài mẫu chung, so sánh ba cấu hình: đầy đủ đã chọn, tắt verification, tắt augmentation. Khi tắt verification, dùng ứng viên trích xuất trực tiếp; khi tắt augmentation, ghi rõ cờ ConceptNet/Wikipedia đã tắt.
 - [ ] Giữ cùng dữ liệu, mô hình và tham số ở các bước chung; đo chất lượng, chi phí và thời gian cho mỗi cấu hình.
 - [ ] Gộp và loại trùng khái niệm sau Integration, trước Augmentation, theo bài học; tính precision/recall/F1 với cùng nhãn chuẩn. Phép chấm này đánh giá trích xuất–kiểm chứng–tích hợp.
 - [ ] Với Augmentation, ghi chi phí và số khái niệm bổ sung. Chỉ chấm chất lượng bổ sung hoặc căn chỉnh ảnh/video khi có nhãn chuẩn tương ứng; mẫu hiện đã kiểm tra chưa có các nhãn đó.
