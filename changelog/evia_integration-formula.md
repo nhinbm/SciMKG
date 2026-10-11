@@ -28,7 +28,3 @@ five rounds scores `5/15 = 0.333` and is rejected.
 Replaying only two author paragraphs (06:35–08:07) retains aerobic respiration,
 enzymes, and energy supply. The published Integration file retains only energy
 supply; its generating configuration is unknown, so this is not an exact reproduction.
-
-Offline regression checks: `python -m unittest discover -s tests -v`.
-These isolate the original pipeline functions because the upstream API caller
-still contains blank configuration placeholders; they do not run live LLMs.
