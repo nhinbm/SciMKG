@@ -1,0 +1,34 @@
+{
+  "lesson_id": "buoyancy",
+  "status": "frozen",
+  "scope": "lesson",
+  "concepts": [
+    "浮力",
+    "石块",
+    "示数",
+    "石块受到重力",
+    "石块浸没在水中",
+    "弹簧测力计对它的拉力",
+    "受力情况",
+    "小球",
+    "铝块",
+    "圆筒",
+    "热气球",
+    "上浮",
+    "物体表面",
+    "上下表面",
+    "合力",
+    "水平方向",
+    "向下的压力",
+    "向上的压力",
+    "矿泉水瓶"
+  ],
+  "provenance": {
+    "source": "author_published",
+    "record_url": "https://zenodo.org/records/19691725",
+    "archive": "Groundtruth.zip",
+    "archive_member": "physics/21浮力（第一课时）_视频课程/groundtruth.txt",
+    "original_sha256": "5ee63173068a221cd6f571ace965a8993d60e430bca5e1e16397abdbe30ee489",
+    "normalization": "Chỉ bỏ dòng trắng và khoảng trắng đầu/cuối từng dòng."
+  }
+}

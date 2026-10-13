@@ -10,8 +10,8 @@ Theo đánh giá của nhóm, các bước xử lý ngữ nghĩa trong SciMKG ph
 
 ### Chuẩn bị chung cho Ex01 và Ex02
 
-- [ ] Chọn một bài học nhỏ có văn bản đầu vào trong `RawData.zip` và nhãn chuẩn có sẵn trong `Groundtruth.zip` của tác giả ([Zenodo](https://zenodo.org/records/19691725)); chỉ lấy bài được chọn. Ex01 và Ex02 dùng cùng bài mẫu này.
-- [ ] Đối chiếu đúng bài và cố định nhãn công bố. Mẫu đã kiểm tra có nhãn theo cả bài học, nên dùng đầy đủ văn bản bài đó để chấm; giữ nhãn riêng khỏi đầu vào mô hình.
+- [x] Chọn và chuẩn bị sáu bài có văn bản đầu vào trong `RawData.zip` và nhãn công bố trong `Groundtruth.zip` của tác giả ([Zenodo](https://zenodo.org/records/19691725)), mỗi môn hai bài. Ex01 dùng `nervous-system`; Ex02 dùng cả sáu bài, gồm bài Ex01. Dữ liệu ở `data/MOOC/`; nguồn và hash trong [manifest](data/MOOC/manifest.json), danh sách/phạm vi trong [docs/MOOC.md](docs/MOOC.md).
+- [x] Đối chiếu đúng bài và cố định nhãn công bố: 75 đoạn và 188 nhãn theo bài; giữ nguyên tệp gốc, kiểm tra CRC và SHA-256. Dùng đầy đủ văn bản công bố của từng bài để chấm với nhãn riêng trong `evaluation`; đầu vào mô hình chỉ ở `inputs`. Hai bài Vật lý bị cắt dở trong nguồn đã được thay trước khi chạy mô hình; xem [đối chiếu nguồn](docs/MOOC.md#đối-chiếu-văn-bản-và-nhãn).
 
 ### Ex01: One lesson — Chi phí một bài học
 
@@ -24,9 +24,9 @@ Theo đánh giá của nhóm, các bước xử lý ngữ nghĩa trong SciMKG ph
 
 ### Ex02: Hiệu quả của từng bước
 
-- [ ] Trên bài mẫu chung, so sánh ba cấu hình: đầy đủ đã chọn, tắt verification, tắt augmentation. Khi tắt verification, dùng ứng viên trích xuất trực tiếp; khi tắt augmentation, ghi rõ cờ ConceptNet/Wikipedia đã tắt.
+- [ ] Trên từng bài trong sáu bài đã cố định, so sánh ba cấu hình: đầy đủ đã chọn, tắt verification, tắt augmentation (18 lượt chạy). Khi tắt verification, dùng ứng viên trích xuất trực tiếp; khi tắt augmentation, ghi rõ cờ ConceptNet/Wikipedia đã tắt.
 - [ ] Giữ cùng dữ liệu, mô hình và tham số ở các bước chung; đo chất lượng, chi phí và thời gian cho mỗi cấu hình.
-- [ ] Gộp và loại trùng khái niệm sau Integration, trước Augmentation, theo bài học; tính precision/recall/F1 với cùng nhãn chuẩn. Phép chấm này đánh giá trích xuất–kiểm chứng–tích hợp.
+- [ ] Gộp và loại trùng khái niệm sau Integration, trước Augmentation, theo bài học; tính precision/recall/F1 với nhãn của đúng bài. Báo cáo từng bài và trung bình cộng từng chỉ số trên sáu bài. Phép chấm này đánh giá trích xuất–kiểm chứng–tích hợp.
 - [ ] Với Augmentation, ghi chi phí và số khái niệm bổ sung. Chỉ chấm chất lượng bổ sung hoặc căn chỉnh ảnh/video khi có nhãn chuẩn tương ứng; mẫu hiện đã kiểm tra chưa có các nhãn đó.
 
 **Dữ liệu đánh giá:** dùng nhãn chuẩn công bố của tác giả; Ex02 không dùng dữ liệu tiếng Việt hoặc nhãn do nhóm/LLM tự tạo. Đầu ra `_Intergrationner` và đồ thị tác giả sinh ra là kết quả tham chiếu, không tự trở thành nhãn chuẩn.
@@ -36,7 +36,7 @@ Theo đánh giá của nhóm, các bước xử lý ngữ nghĩa trong SciMKG ph
 ### Sau Ex01–Ex02: Ước lượng khi mở rộng
 
 - [ ] Từ cấu hình đã đánh giá, ước lượng chi phí cho nhiều bài; xét độ dài bài, số ảnh, khái niệm trùng và kết quả có thể tái sử dụng.
-- [ ] Ghi giả định và phạm vi ước lượng. Một bài chỉ cho ước lượng thăm dò; cần thêm mẫu để kết luận chi phí toàn tập.
+- [ ] Ghi giả định và phạm vi ước lượng. Ex01 dùng một bài, Ex02 dùng sáu bài; đây vẫn là mẫu nhỏ, cần thêm mẫu đại diện để kết luận chi phí toàn tập.
 
 ### Ex03 (tùy chọn): Một số bài học tiếng Việt
 
