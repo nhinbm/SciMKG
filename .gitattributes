@@ -1,0 +1,2 @@
+# Giữ nguyên byte dữ liệu công bố và các tệp đã cố định trong manifest.
+data/MOOC/** -text whitespace=cr-at-eol

@@ -1,0 +1,337 @@
+{
+  "schema_version": 1,
+  "dataset": "MOOC",
+  "record_url": "https://zenodo.org/records/19691725",
+  "record_revision": 4,
+  "record_updated": "2026-04-22T08:44:07.233868+00:00",
+  "source_title": "SciMKG: A Multimodal Knowledge Graph for Science Education with Text, Image, Video and Audio",
+  "license": "cc-by-4.0",
+  "prepared_at_utc": "2026-10-13T03:11:33.117458+00:00",
+  "path_base": "Các đường dẫn tệp tương đối với thư mục chứa manifest.json.",
+  "selection": "Hai bài văn bản ngắn hợp lệ có nhãn công bố ở mỗi môn; chọn trước khi chạy mô hình.",
+  "integrity": "Đã kiểm tra CRC và SHA-256 từng tệp; MD5 toàn ZIP chỉ ghi từ metadata Zenodo.",
+  "resources_prepared": [
+    "lesson_text",
+    "published_concept_labels"
+  ],
+  "video_duration_verified": false,
+  "archives": {
+    "RawData.zip": {
+      "source_url": "https://zenodo.org/records/19691725/files/RawData.zip",
+      "archive_bytes": 5478401384,
+      "published_checksum": "md5:afe8af58643089eb998c7fd15ff1ef98",
+      "whole_archive_checksum_verified": false,
+      "transferred_bytes": 12348867,
+      "requests": [
+        {
+          "range": "bytes=-65558",
+          "bytes": 65558,
+          "sha256": "b4a2da78c779a47e9f33e429bc79b2174b6e05f69f199b4f8dd4e4a9d0911698"
+        },
+        {
+          "range": "bytes=5466135019-5478401285",
+          "bytes": 12266267,
+          "sha256": "e84582f09498a5d85a50070339615f644b1e4fcb16c3653d802ae1f2eb1b0ae8"
+        },
+        {
+          "range": "bytes=2564888110-2564889958",
+          "bytes": 1849,
+          "sha256": "c6019f531646cde8f44b6ac830a58a16e89374c14ead1d26620d56bf313acc2a"
+        },
+        {
+          "range": "bytes=1825146108-1825148859",
+          "bytes": 2752,
+          "sha256": "764ab86a2e6ab91a9b2e313f3a938ab6dbff157f1f1431549cea7ebae217f81a"
+        },
+        {
+          "range": "bytes=4673221328-4673224631",
+          "bytes": 3304,
+          "sha256": "5eb3462f241d8485d1ba0a0fd55dd92ac2e28ddbf8c1df9f01a48b5b9d66355a"
+        },
+        {
+          "range": "bytes=4716586288-4716590088",
+          "bytes": 3801,
+          "sha256": "5be560488556e5504d148b5f927108e3d795c9003798723dc0a31ec3d4d54d65"
+        },
+        {
+          "range": "bytes=3235425936-3235428428",
+          "bytes": 2493,
+          "sha256": "cb96955ddaf6ff4f4904b42b555862157d5054dcb93f27f58b4e199dc49b2d4f"
+        },
+        {
+          "range": "bytes=3231087119-3231089961",
+          "bytes": 2843,
+          "sha256": "0caa4780e76f90dd75b550a9b327ebc7a5bf346a723b32edc8f903a4b174b277"
+        }
+      ]
+    },
+    "Groundtruth.zip": {
+      "source_url": "https://zenodo.org/records/19691725/files/Groundtruth.zip",
+      "archive_bytes": 131337,
+      "published_checksum": "md5:cc7e142c1685636bfbbe47b3dfa6606f",
+      "whole_archive_checksum_verified": false,
+      "transferred_bytes": 67937,
+      "requests": [
+        {
+          "range": "bytes=-65558",
+          "bytes": 65558,
+          "sha256": "40144d64fc680731d546c79aae14d72c4cd183a9bdbce1a535444a8eb4f3c933"
+        },
+        {
+          "range": "bytes=15758-16184",
+          "bytes": 427,
+          "sha256": "d6404a05ca7eda16f0ea0e5837e84587420fc1c83a29f3a69b075bb1b35e27ec"
+        },
+        {
+          "range": "bytes=382-909",
+          "bytes": 528,
+          "sha256": "aa1fc1b64989e0354d1373708ff35951fa0694b4c7ffed0a103c2f4c8c83fa2e"
+        },
+        {
+          "range": "bytes=60893-61242",
+          "bytes": 350,
+          "sha256": "7d08df78acdbbb6486fd55668bf58e6aabcfe72a0a3013afdb998ff076b161f0"
+        },
+        {
+          "range": "bytes=64789-65120",
+          "bytes": 332,
+          "sha256": "5407e0a61f0f84a2b824716b9bf981172ed3fbc11f8dba363103a8d188097d08"
+        },
+        {
+          "range": "bytes=51490-51788",
+          "bytes": 299,
+          "sha256": "3d494d9b64446589692897f4952207f9d86b40676e1b1c8cb3b067d8dc7dcc76"
+        },
+        {
+          "range": "bytes=49503-49945",
+          "bytes": 443,
+          "sha256": "eaf9195a50a4ab89baf92a280ef554e047a49cb7a05efd008474b3905514cb69"
+        }
+      ]
+    }
+  },
+  "lessons": [
+    {
+      "lesson_id": "nervous-system",
+      "subject": "Biology",
+      "title_vi": "Cấu tạo hệ thần kinh",
+      "title_original": "27神经系统的组成_视频课程",
+      "language": "zh",
+      "segment_count": 14,
+      "label_count": 30,
+      "unique_label_count": 30,
+      "first_timestamp": "00:02",
+      "last_timestamp": "16:56",
+      "label_scope": "lesson",
+      "label_status": "frozen",
+      "input": {
+        "path": "nervous-system/inputs/lesson.txt",
+        "archive": "RawData.zip",
+        "archive_member": "Natural Science Disciplines/Biology/chuyi/2/27神经系统的组成_视频课程/27神经系统的组成_视频课程.txt",
+        "source_url": "https://zenodo.org/records/19691725/files/RawData.zip",
+        "bytes": 3671,
+        "crc32": "4845aadb",
+        "sha256": "f3c122a27fadc7ec19afbf94cfbe865125e2fd33469ccadd07bcbd7205b3454f"
+      },
+      "groundtruth": {
+        "path": "nervous-system/evaluation/groundtruth.txt",
+        "archive": "Groundtruth.zip",
+        "archive_member": "biology/27神经系统的组成_视频课程/groundtruth.txt",
+        "source_url": "https://zenodo.org/records/19691725/files/Groundtruth.zip",
+        "bytes": 408,
+        "crc32": "5ddd392a",
+        "sha256": "b2606dbbb3eec8a9adf8be082dc8db80a6146958f9d5dc7653ba85acbd83c681"
+      },
+      "gold": {
+        "path": "nervous-system/evaluation/gold.json",
+        "bytes": 1109,
+        "sha256": "e67b7592ce6aad5b739545ca3beeb559597bc034c35e157a8454ab8234390a68"
+      }
+    },
+    {
+      "lesson_id": "amphibian-reproduction",
+      "subject": "Biology",
+      "title_vi": "Sinh sản và phát triển ở động vật lưỡng cư",
+      "title_original": "10两栖动物的生殖和发育_视频课程",
+      "language": "zh",
+      "segment_count": 7,
+      "label_count": 57,
+      "unique_label_count": 57,
+      "first_timestamp": "00:06",
+      "last_timestamp": "08:20",
+      "label_scope": "lesson",
+      "label_status": "frozen",
+      "input": {
+        "path": "amphibian-reproduction/inputs/lesson.txt",
+        "archive": "RawData.zip",
+        "archive_member": "Natural Science Disciplines/Biology/chuer/2/10两栖动物的生殖和发育_视频课程/10两栖动物的生殖和发育_视频课程.txt",
+        "source_url": "https://zenodo.org/records/19691725/files/RawData.zip",
+        "bytes": 5106,
+        "crc32": "f7cab188",
+        "sha256": "1001ae92f44963690a6ee2ae93990970282ba0a6c7f2e171fb846800ae5b1fd5"
+      },
+      "groundtruth": {
+        "path": "amphibian-reproduction/evaluation/groundtruth.txt",
+        "archive": "Groundtruth.zip",
+        "archive_member": "biology/10两栖动物的生殖和发育_视频课程/groundtruth.txt",
+        "source_url": "https://zenodo.org/records/19691725/files/Groundtruth.zip",
+        "bytes": 606,
+        "crc32": "a4fef9ff",
+        "sha256": "459df5734d54fa11b3e8ab710de6f03975b56243f782ff03a292735cf5a13e2b"
+      },
+      "gold": {
+        "path": "amphibian-reproduction/evaluation/gold.json",
+        "bytes": 1486,
+        "sha256": "610cfee1a2dc63275245e65093371c864944458c8aa9b573a958c656cacec5d2"
+      }
+    },
+    {
+      "lesson_id": "atmospheric-pressure",
+      "subject": "Physics",
+      "title_vi": "Áp suất khí quyển — tiết 1",
+      "title_original": "17大气压强（第一课时）_视频课程",
+      "language": "zh",
+      "segment_count": 12,
+      "label_count": 21,
+      "unique_label_count": 21,
+      "first_timestamp": "00:07",
+      "last_timestamp": "14:47",
+      "label_scope": "lesson",
+      "label_status": "frozen",
+      "input": {
+        "path": "atmospheric-pressure/inputs/lesson.txt",
+        "archive": "RawData.zip",
+        "archive_member": "Natural Science Disciplines/Physics/chuer2/17大气压强（第一课时）_视频课程/17大气压强（第一课时）_视频课程.txt",
+        "source_url": "https://zenodo.org/records/19691725/files/RawData.zip",
+        "bytes": 6810,
+        "crc32": "8b15858e",
+        "sha256": "e779861bb4a6c3ce853b66de062f37de6c1d5bd4378e290caf85fc4b41dee68e"
+      },
+      "groundtruth": {
+        "path": "atmospheric-pressure/evaluation/groundtruth.txt",
+        "archive": "Groundtruth.zip",
+        "archive_member": "physics/17大气压强（第一课时）_视频课程/groundtruth.txt",
+        "source_url": "https://zenodo.org/records/19691725/files/Groundtruth.zip",
+        "bytes": 300,
+        "crc32": "54e3e8e4",
+        "sha256": "58780d883a686ed55e5867a80dfba012693fae902f99ce9f1b5ad11116e28cc5"
+      },
+      "gold": {
+        "path": "atmospheric-pressure/evaluation/gold.json",
+        "bytes": 962,
+        "sha256": "cbf3727559c0b45b6186bc48c4b2e5749c24ebff1cf9ccca68602e1e85013eca"
+      }
+    },
+    {
+      "lesson_id": "buoyancy",
+      "subject": "Physics",
+      "title_vi": "Lực đẩy — tiết 1",
+      "title_original": "21浮力（第一课时）_视频课程",
+      "language": "zh",
+      "segment_count": 14,
+      "label_count": 19,
+      "unique_label_count": 19,
+      "first_timestamp": "00:09",
+      "last_timestamp": "17:31",
+      "label_scope": "lesson",
+      "label_status": "frozen",
+      "input": {
+        "path": "buoyancy/inputs/lesson.txt",
+        "archive": "RawData.zip",
+        "archive_member": "Natural Science Disciplines/Physics/chuer2/21浮力（第一课时）_视频课程/21浮力（第一课时）_视频课程.txt",
+        "source_url": "https://zenodo.org/records/19691725/files/RawData.zip",
+        "bytes": 8735,
+        "crc32": "1bb246c5",
+        "sha256": "39f7051ada0905f4db9b15abdafe5debbd0028eb4b600df255a587c9b0325e54"
+      },
+      "groundtruth": {
+        "path": "buoyancy/evaluation/groundtruth.txt",
+        "archive": "Groundtruth.zip",
+        "archive_member": "physics/21浮力（第一课时）_视频课程/groundtruth.txt",
+        "source_url": "https://zenodo.org/records/19691725/files/Groundtruth.zip",
+        "bytes": 254,
+        "crc32": "bae4e747",
+        "sha256": "5ee63173068a221cd6f571ace965a8993d60e430bca5e1e16397abdbe30ee489"
+      },
+      "gold": {
+        "path": "buoyancy/evaluation/gold.json",
+        "bytes": 886,
+        "sha256": "ef47b581a7d425a73588604ad6bfb1d26ebc72e4eb63b63d316f28b37a338f80"
+      }
+    },
+    {
+      "lesson_id": "sulfuric-acid-and-sulfate",
+      "subject": "Chemistry",
+      "title_vi": "Axit sulfuric và ion sulfate",
+      "title_original": "4（合格考水平）硫酸及硫酸根",
+      "language": "zh",
+      "segment_count": 15,
+      "label_count": 13,
+      "unique_label_count": 13,
+      "first_timestamp": "00:01",
+      "last_timestamp": "11:06",
+      "label_scope": "lesson",
+      "label_status": "frozen",
+      "input": {
+        "path": "sulfuric-acid-and-sulfate/inputs/lesson.txt",
+        "archive": "RawData.zip",
+        "archive_member": "Natural Science Disciplines/Chemcial/bx2/4（合格考水平）硫酸及硫酸根/4（合格考水平）硫酸及硫酸根.txt",
+        "source_url": "https://zenodo.org/records/19691725/files/RawData.zip",
+        "bytes": 5278,
+        "crc32": "a03dc927",
+        "sha256": "ea442567e36ca1e35fd98c7bca6eb260b96738fbc2d547afd5af230cfb0eae0b"
+      },
+      "groundtruth": {
+        "path": "sulfuric-acid-and-sulfate/evaluation/groundtruth.txt",
+        "archive": "Groundtruth.zip",
+        "archive_member": "chemical/4（合格考水平）硫酸及硫酸根/groundtruth.txt",
+        "source_url": "https://zenodo.org/records/19691725/files/Groundtruth.zip",
+        "bytes": 173,
+        "crc32": "de992eb2",
+        "sha256": "b4b312ef2595dbe083e23b00259e348179e2cae13ea1a3ff8ff6557a2616b297"
+      },
+      "gold": {
+        "path": "sulfuric-acid-and-sulfate/evaluation/gold.json",
+        "bytes": 788,
+        "sha256": "f117fd9db25eda19db434e2b6aaf0b27a9d0a49bea68535728bfa4b711df2fff"
+      }
+    },
+    {
+      "lesson_id": "proteins",
+      "subject": "Chemistry",
+      "title_vi": "Protein",
+      "title_original": "40蛋白质",
+      "language": "zh",
+      "segment_count": 13,
+      "label_count": 48,
+      "unique_label_count": 48,
+      "first_timestamp": "00:05",
+      "last_timestamp": "16:58",
+      "label_scope": "lesson",
+      "label_status": "frozen",
+      "input": {
+        "path": "proteins/inputs/lesson.txt",
+        "archive": "RawData.zip",
+        "archive_member": "Natural Science Disciplines/Chemcial/bx2/40蛋白质/40蛋白质.txt",
+        "source_url": "https://zenodo.org/records/19691725/files/RawData.zip",
+        "bytes": 5955,
+        "crc32": "01379ecf",
+        "sha256": "030e043a434a3fe207928868d6445143e99c8799a012c9306eb2e326f05c0a62"
+      },
+      "groundtruth": {
+        "path": "proteins/evaluation/groundtruth.txt",
+        "archive": "Groundtruth.zip",
+        "archive_member": "chemical/40蛋白质/groundtruth.txt",
+        "source_url": "https://zenodo.org/records/19691725/files/Groundtruth.zip",
+        "bytes": 564,
+        "crc32": "9a543baa",
+        "sha256": "2fcc4b39ee7912c56dcbc17659b4a60510b67569e59ecc5c31625f6a3faeefce"
+      },
+      "gold": {
+        "path": "proteins/evaluation/gold.json",
+        "bytes": 1343,
+        "sha256": "382ef5bf64abdbe7689878a92ac9756de3045098593b3a6ed72b02a3d788f2f1"
+      }
+    }
+  ]
+}

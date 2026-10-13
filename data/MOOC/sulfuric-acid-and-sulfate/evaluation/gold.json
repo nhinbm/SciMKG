@@ -1,0 +1,28 @@
+{
+  "lesson_id": "sulfuric-acid-and-sulfate",
+  "status": "frozen",
+  "scope": "lesson",
+  "concepts": [
+    "紫色石蕊",
+    "弱酸盐",
+    "金属活动顺序表",
+    "强氧化性",
+    "铝罐车",
+    "铁罐车",
+    "脱水性",
+    "结晶水",
+    "氢氧元素",
+    "蔗糖",
+    "氯化钡",
+    "硫酸钠溶液",
+    "氯化银沉淀"
+  ],
+  "provenance": {
+    "source": "author_published",
+    "record_url": "https://zenodo.org/records/19691725",
+    "archive": "Groundtruth.zip",
+    "archive_member": "chemical/4（合格考水平）硫酸及硫酸根/groundtruth.txt",
+    "original_sha256": "b4b312ef2595dbe083e23b00259e348179e2cae13ea1a3ff8ff6557a2616b297",
+    "normalization": "Chỉ bỏ dòng trắng và khoảng trắng đầu/cuối từng dòng."
+  }
+}

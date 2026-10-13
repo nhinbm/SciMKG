@@ -1,0 +1,36 @@
+{
+  "lesson_id": "atmospheric-pressure",
+  "status": "frozen",
+  "scope": "lesson",
+  "concepts": [
+    "托里拆利实验",
+    "大气压强的大小",
+    "大气压强",
+    "大气层",
+    "抽气",
+    "作用力",
+    "大气压",
+    "玻璃杯",
+    "白气",
+    "倒置",
+    "气压",
+    "重力作用",
+    "下落",
+    "马德堡半球实验",
+    "瓶内部空气的压力",
+    "瓶内外的空气气压",
+    "瓶外空气的压力",
+    "水柱",
+    "真空状态",
+    "外界大气压",
+    "数值"
+  ],
+  "provenance": {
+    "source": "author_published",
+    "record_url": "https://zenodo.org/records/19691725",
+    "archive": "Groundtruth.zip",
+    "archive_member": "physics/17大气压强（第一课时）_视频课程/groundtruth.txt",
+    "original_sha256": "58780d883a686ed55e5867a80dfba012693fae902f99ce9f1b5ad11116e28cc5",
+    "normalization": "Chỉ bỏ dòng trắng và khoảng trắng đầu/cuối từng dòng."
+  }
+}

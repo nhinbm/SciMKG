@@ -96,6 +96,53 @@ rdf = kg.rdf()
 print(rdf)
 ```
 
+## Chuẩn bị dữ liệu MOOC cho Ex01 và Ex02
+
+Yêu cầu Python ≥ 3.11 và kết nối HTTPS tới Zenodo. Lệnh chuẩn bị dùng thư viện
+chuẩn Python; không cần cài các phụ thuộc LLM trong `requirements.txt`.
+Chạy từ thư mục fork SciMKG:
+
+```bash
+python3 scripts/prepare_mooc.py
+python3 scripts/prepare_mooc.py --check
+```
+
+Lệnh lấy các văn bản và nhãn đã chọn từ bản công bố
+[Zenodo 19691725](https://zenodo.org/records/19691725) bằng HTTP Range. Khi dữ
+liệu đã có, lệnh kiểm tra cục bộ và giữ nguyên tệp. Máy chủ bỏ qua Range,
+checksum thay đổi hoặc đoạn văn bản không hợp lệ đều làm lệnh dừng.
+Để tái tạo ở thư mục mới, dùng `--output /duong/dan/MOOC`.
+
+```text
+data/MOOC/
+  manifest.json
+  <lesson_id>/
+    inputs/lesson.txt
+    evaluation/groundtruth.txt
+    evaluation/gold.json
+```
+
+`manifest.json` mô tả nguồn, đường dẫn tương đối, mã kiểm tra và phạm vi văn
+bản/nhãn của từng bài. `lesson.txt` và `groundtruth.txt` giữ nguyên byte của
+tệp công bố; `gold.json` giữ nhãn theo bài học với `status: frozen`, chỉ bỏ
+dòng trắng và khoảng trắng đầu/cuối. CRC kiểm tra thành phần ZIP; SHA-256
+giúp đối chiếu đúng bản tệp. MD5 toàn ZIP được ghi theo metadata Zenodo,
+chưa được kiểm tra bằng cách tải toàn bộ ZIP.
+
+Khi chạy EVIA, truyền **thư mục `inputs` của từng bài**. Ví dụ đầu vào cho
+Ex01 là `data/MOOC/nervous-system/inputs/`; nhãn đánh giá tương ứng ở
+`data/MOOC/nervous-system/evaluation/gold.json`. Chọn cùng bản dữ liệu đã
+kiểm tra cho mọi cấu hình Ex02. Phạm vi bài và trạng thái chuẩn bị nằm trong
+[CHECKLIST.md](CHECKLIST.md); nguồn đối chiếu và giới hạn dữ liệu nằm trong
+[docs/MOOC.md](docs/MOOC.md).
+
+Kiểm thử bộ chuẩn bị dữ liệu cần `pytest`:
+
+```bash
+python3 -m pip install pytest
+python3 -m pytest -q tests/test_prepare_mooc.py
+```
+
 ## 📊 Dataset Statistics
 
 <table>
