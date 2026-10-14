@@ -1,0 +1,13 @@
+wandb==0.30.0
+weave==0.53.12
+wandb-workspaces==0.4.13
+OpenCC==1.4.2
+rdflib==7.6.0
+requests==2.34.2
+beautifulsoup4==4.15.0
+Pillow==12.3.0
+jsonschema==4.26.0
+# Imported at module level by the author's Wikipediaapi_model.py and ImageAligment.py.
+Wikipedia-API==0.16.0
+openai==3.29.0
+tiktoken==0.14.0

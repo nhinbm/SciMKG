@@ -102,8 +102,9 @@ def Extraction(filePtah: str, models: str, subject: str, allEntity: set, k: int)
                             entity_time.add(item)
                             entity_set.add(item)
                     entity_time_set[timestamp] = entity_time         
-                except:
-                    continue
+                except Exception as exc:
+                    # Failed inference must not silently remove a paragraph from a cost run.
+                    raise RuntimeError(f"Extraction failed for {filePtah}: {line[:80]!r}") from exc
                 print("=====================================")  
                 print(f"timestamp: {timestamp} Entities: {entity_set} model: deepseek-v3 ")
                 print("=====================================")         
