@@ -15,7 +15,7 @@ import zlib
 
 RECORD_URL = "https://zenodo.org/records/19691725"
 METADATA_URL = "https://zenodo.org/api/records/19691725"
-DEFAULT_OUTPUT = Path(__file__).resolve().parents[1] / "data" / "MOOC"
+DEFAULT_OUTPUT = Path(__file__).resolve().parents[2] / "data" / "MOOC"
 ARCHIVES = {
     "RawData.zip": (5478401384, "md5:afe8af58643089eb998c7fd15ff1ef98"),
     "Groundtruth.zip": (131337, "md5:cc7e142c1685636bfbbe47b3dfa6606f"),
