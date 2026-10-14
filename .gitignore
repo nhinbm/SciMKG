@@ -1,1 +1,7 @@
 __pycache__/
+.venv-ex01/
+runs/
+wandb/
+data/MOOC/*/media/
+.env
+.lavish/

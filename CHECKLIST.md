@@ -13,18 +13,32 @@ Theo đánh giá của nhóm, các bước xử lý ngữ nghĩa trong SciMKG ph
 - [x] Chọn và chuẩn bị sáu bài có văn bản đầu vào trong `RawData.zip` và nhãn công bố trong `Groundtruth.zip` của tác giả ([Zenodo](https://zenodo.org/records/19691725)), mỗi môn hai bài. Ex01 dùng `nervous-system`; Ex02 dùng cả sáu bài, gồm bài Ex01. Dữ liệu ở `data/MOOC/`; nguồn và hash trong [manifest](data/MOOC/manifest.json), danh sách/phạm vi trong [docs/MOOC.md](docs/MOOC.md).
 - [x] Đối chiếu đúng bài và cố định nhãn công bố: 75 đoạn và 188 nhãn theo bài; giữ nguyên tệp gốc, kiểm tra CRC và SHA-256. Dùng đầy đủ văn bản công bố của từng bài để chấm với nhãn riêng trong `evaluation`; đầu vào mô hình chỉ ở `inputs`. Hai bài Vật lý bị cắt dở trong nguồn đã được thay trước khi chạy mô hình; xem [đối chiếu nguồn](docs/MOOC.md#đối-chiếu-văn-bản-và-nhãn).
 
-### Ex01: One lesson — Chi phí một bài học
+### Ex01: Giải phẫu chi phí một bài học
 
-- [ ] Chạy đầy đủ bài mẫu chung đã chọn; ghi số đoạn văn bản, ảnh, thời lượng video và tài nguyên còn thiếu.
-- [ ] Đo số lượt gọi, token đầu vào/đầu ra và thời gian; tách EVIA (E/V/I/A), tạo giải thích, căn chỉnh ảnh và tạo âm thanh. Chi phí tiền xử lý ghi riêng.
-- [ ] Ghi cả lượt gọi lại và kết quả lấy từ bộ nhớ đệm; lưu mô hình/phiên bản, prompt, số vòng, ngưỡng, cờ nguồn ngoài, phiên bản mã và ngày chạy.
-- [ ] Tính tiền theo đơn vị dịch vụ và bảng giá ngày chạy; phân biệt tiền API thực trả với tiền ước tính khi dùng thuê bao.
+**Mục đích:** đo một bài học đi từ văn bản đến đồ thị tốn bao nhiêu lời gọi, token và thời gian.
+Rồi quy ra tiền theo giá API công khai.
+Không đánh giá chất lượng.
 
-**Đầu ra:** bảng chi phí từng bước và tổng chi phí cho bài học.
+**Chạy:** bài `nervous-system`, đủ pipeline, `gpt-6-luna` (effort low), 5 vòng, ngưỡng 0,7, một lượt duy nhất.
+
+**Đầu ra sau khi chạy:**
+- Bảng token, thời gian và tiền theo bước và bước con (E, V feedback, V refinement, I, A, giải thích, ảnh lần 1, 2, 3).
+- Tổng chi phí kiểu API (một con số), kèm số CLI đo được làm tham chiếu phụ.
+- Đơn giá mỗi đơn vị (đoạn, ảnh, khái niệm).
+- Quy đổi sang các mô hình bài báo dùng (GPT-4o, DeepSeek-V3, Gemini-1.5-Flash) theo cấu hình của mã tác giả (mỗi bước một mô hình, V gồm ba mô hình), và sang các mô hình hiện hành (Luna, Terra, Sol).
+- Đồ thị của bài (JSON, RDF, giải thích, WAV) và dashboard W&B công khai.
+
+- [ ] Chạy lại Ex01 theo thiết kế trên và đưa số đo vào báo cáo.
 
 ### Ex02: Hiệu quả của từng bước
 
-- [ ] Trên từng bài trong sáu bài đã cố định, so sánh ba cấu hình: đầy đủ đã chọn, tắt verification, tắt augmentation (18 lượt chạy). Khi tắt verification, dùng ứng viên trích xuất trực tiếp; khi tắt augmentation, ghi rõ cờ ConceptNet/Wikipedia đã tắt.
+**Tiêu chí chọn cấu hình ablation:** một cấu hình chỉ được đưa vào Ex02 khi thỏa cả bốn điều kiện.
+1. Đổi một yếu tố tốn nhiều chi phí ở Ex01, để kết quả trả lời được "tốn bao nhiêu để mua chất lượng".
+2. Chấm được bằng dữ liệu hiện có (hiện chỉ có nhãn ở mức khái niệm).
+3. Bài báo có mốc để so, dù chỉ so được chiều thay đổi.
+4. Kết quả có thể đổi một quyết định, ví dụ có nên giữ 5 vòng kiểm chứng khi mở rộng.
+
+- [ ] Trên từng bài trong sáu bài đã cố định, so sánh ba cấu hình: đầy đủ đã chọn, tắt verification, 1 vòng kiểm chứng (đề xuất thay cho tắt augmentation, chờ chốt; 18 lượt chạy). Khi tắt verification, dùng ứng viên trích xuất trực tiếp; khi chỉ 1 vòng, giữ ngưỡng 0,7 và ghi số vòng vào cấu hình.
 - [ ] Giữ cùng dữ liệu, mô hình và tham số ở các bước chung; đo chất lượng, chi phí và thời gian cho mỗi cấu hình.
 - [ ] Gộp và loại trùng khái niệm sau Integration, trước Augmentation, theo bài học; tính precision/recall/F1 với nhãn của đúng bài. Báo cáo từng bài và trung bình cộng từng chỉ số trên sáu bài. Phép chấm này đánh giá trích xuất–kiểm chứng–tích hợp.
 - [ ] Với Augmentation, ghi chi phí và số khái niệm bổ sung. Chỉ chấm chất lượng bổ sung hoặc căn chỉnh ảnh/video khi có nhãn chuẩn tương ứng; mẫu hiện đã kiểm tra chưa có các nhãn đó.
@@ -49,6 +63,6 @@ Theo đánh giá của nhóm, các bước xử lý ngữ nghĩa trong SciMKG ph
 ## Công khai kết quả bằng Weights & Biases
 
 - [ ] Mỗi cấu hình có một lượt chạy W&B, lưu cấu hình, chi phí, thời gian, chỉ số chất lượng và bảng nhãn–dự đoán; đính kèm JSON/RDF và nguồn dữ liệu để đối chiếu.
-- [ ] Đồng bộ kết quả lên dự án đặt chế độ **Public**, kiểm tra link người ngoài xem được và dẫn link trong báo cáo. W&B có thể ghi nhận thực nghiệm suy luận; nhãn và chỉ số cần do nhóm chuẩn bị/tính.
+- [ ] Ex01 chạy lại: run `<mô hình>-<bài>` trong dự án Public, dashboard bốn mục xem được công khai (kiểm tra bằng cửa sổ ẩn danh).
 
 Tham khảo: [ghi dữ liệu và kết quả](https://docs.wandb.ai/guides/track/log/), [quyền xem dự án công khai](https://docs.wandb.ai/guides/hosting/iam/access-management/restricted-projects/).

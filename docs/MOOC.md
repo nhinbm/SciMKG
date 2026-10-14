@@ -22,8 +22,8 @@ Tệp gốc giữ nguyên byte; JSON nhãn có `status: frozen`, chỉ bỏ dòn
 Yêu cầu Python ≥ 3.11:
 
 ```bash
-python3 scripts/prepare_mooc.py
-python3 scripts/prepare_mooc.py --check
+python3 scripts/preprocessing/prepare_mooc.py
+python3 scripts/preprocessing/prepare_mooc.py --check
 ```
 
 Lệnh đầu tải các thành phần đã chọn nếu chưa có dữ liệu; `--check` chỉ kiểm tra cục bộ.
