@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import csv
-from pathlib import Path
 from statistics import mean
 
 from experiments.ex01.core import ROOT, read_json, write_json
