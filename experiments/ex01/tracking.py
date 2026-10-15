@@ -94,6 +94,9 @@ class Tracking:
         self.root, self.mode = Path(root), mode
         self.entity, self.project = entity, project
         self.model, self.lesson_id = config["model"], config["lesson_id"]
+        # Other experiments name their runs in the config; an Ex01 config has no labels and keeps these defaults.
+        labels = config.get("tracking_labels", {})
+        self.experiment = labels.get("experiment", "Ex01")
         self.root.mkdir(parents=True, exist_ok=True)
         self.receipt_path = self.root / "tracking.json"
         self.receipt = read_json(self.receipt_path) if self.receipt_path.exists() else {
@@ -112,8 +115,9 @@ class Tracking:
         settings = wandb.Settings(init_timeout=45)
         self.run = wandb.init(entity=entity, project=project, mode=mode,
             id=self.receipt["run_id"], resume="allow" if mode == "online" else None,
-            name=f"{self.model}-{self.lesson_id}", group=self.model, job_type="inference_cost",
-            tags=["Ex01", "subscription", self.model, self.lesson_id, "quality-not-measured"],
+            name=labels.get("run_name", f"{self.model}-{self.lesson_id}"), group=labels.get("group", self.model),
+            job_type=labels.get("job_type", "inference_cost"),
+            tags=labels.get("tags", ["Ex01", "subscription", self.model, self.lesson_id, "quality-not-measured"]),
             config=config, dir=str(self.root.resolve()), settings=settings)
         self.receipt.update(mode=mode, run_url=self.run.url if mode == "online" else None,
                             wandb_directory=self.run.dir)
@@ -123,7 +127,7 @@ class Tracking:
             self.weave_client = weave.init(f"{entity}/{project}", settings={
                 "enable_wal": True, "enable_disk_fallback": True, "print_call_link": False,
                 "http_timeout": 30, "retry_max_attempts": 3},
-                attributes={"experiment": "Ex01", "model": self.model})
+                attributes={"experiment": self.experiment, "model": self.model})
             def measured_operation(inputs):
                 """Op declaration; measured timestamps/outputs are supplied from the durable journal."""
                 return inputs
@@ -195,11 +199,11 @@ class Tracking:
         for key, value in summary_keys(report).items():
             self.run.summary[key] = value
         self.run.summary["weave_root_trace_url"] = self.receipt.get("root_trace_url")
-        artifact = wandb.Artifact(f"ex01-{self.receipt['run_id']}", type="experiment_results",
+        artifact = wandb.Artifact(f"{self.experiment.lower()}-{self.receipt['run_id']}", type="experiment_results",
                                   metadata={"model": self.model, "lesson_id": self.lesson_id})
         # Explicit allowlist: never recursively upload caches, auth, or a virtual environment.
         for name in ("config.json", "summary.json", "cost.csv", "cost.md", "cost.json", "events.jsonl",
-                     "batches.jsonl", "lesson.json", "evi.json", "augmentation.json", "images.json",
+                     "batches.jsonl", "lesson.json", "evi.json", "quality.json", "augmentation.json", "images.json",
                      "explanations.json", "audio.json", "video.json", "triples.json", "graph.ttl"):
             if (root / name).is_file():
                 artifact.add_file(str(root / name), name=name)
