@@ -38,10 +38,15 @@ Không đánh giá chất lượng.
 3. Bài báo có mốc để so, dù chỉ so được chiều thay đổi.
 4. Kết quả có thể đổi một quyết định, ví dụ có nên giữ 5 vòng kiểm chứng khi mở rộng.
 
-- [ ] Trên từng bài trong sáu bài đã cố định, so sánh ba cấu hình: đầy đủ đã chọn, tắt verification, 1 vòng kiểm chứng (đề xuất thay cho tắt augmentation, chờ chốt; 18 lượt chạy). Khi tắt verification, dùng ứng viên trích xuất trực tiếp; khi chỉ 1 vòng, giữ ngưỡng 0,7 và ghi số vòng vào cấu hình.
-- [ ] Giữ cùng dữ liệu, mô hình và tham số ở các bước chung; đo chất lượng, chi phí và thời gian cho mỗi cấu hình.
-- [ ] Gộp và loại trùng khái niệm sau Integration, trước Augmentation, theo bài học; tính precision/recall/F1 với nhãn của đúng bài. Báo cáo từng bài và trung bình cộng từng chỉ số trên sáu bài. Phép chấm này đánh giá trích xuất–kiểm chứng–tích hợp.
-- [ ] Với Augmentation, ghi chi phí và số khái niệm bổ sung. Chỉ chấm chất lượng bổ sung hoặc căn chỉnh ảnh/video khi có nhãn chuẩn tương ứng; mẫu hiện đã kiểm tra chưa có các nhãn đó.
+- [x] Trên từng bài trong sáu bài đã cố định, so sánh ba cấu hình: đầy đủ (5 vòng), 1 vòng kiểm chứng (thay cho tắt augmentation), tắt verification (18 lượt chạy; `full` trên `nervous-system` dùng lại lượt Ex01). Khi tắt verification, dùng ứng viên trích xuất trực tiếp; khi chỉ 1 vòng, giữ ngưỡng 0,7 và ghi số vòng vào cấu hình. Mã và cách chạy: [docs/EX02.md](docs/EX02.md).
+  - [x] Mã Ex02 dùng lại hàm E/V/I/A của Ex01; chạy thử offline đủ ba cấu hình bằng client giả.
+  - [x] Lượt thử thật: `amphibian-reproduction`, tắt verification (37 lời gọi, có run W&B).
+  - [x] 16 lượt còn lại (`scripts/experiments/ex-02/run_all.sh`).
+  - Đã cân nhắc nhưng không làm (14/10/2026): thêm Haiku vào V, lặp lại mỗi cấu hình, 3 vòng V, quét ngưỡng.
+    Mỗi ô chỉ có một lần chạy, nên chênh lệch giữa cấu hình gồm cả dao động giữa các lần gọi E; báo cáo cần ghi rõ giới hạn này.
+- [x] Giữ cùng dữ liệu, mô hình và tham số ở các bước chung; đo chất lượng, chi phí và thời gian cho mỗi cấu hình.
+- [x] Gộp và loại trùng khái niệm sau Integration, trước Augmentation, theo bài học; tính precision/recall/F1 với nhãn của đúng bài. Báo cáo từng bài và trung bình cộng từng chỉ số trên sáu bài. Phép chấm này đánh giá trích xuất–kiểm chứng–tích hợp.
+- [x] Với Augmentation, ghi chi phí và số khái niệm bổ sung. Chỉ chấm chất lượng bổ sung hoặc căn chỉnh ảnh/video khi có nhãn chuẩn tương ứng; mẫu hiện đã kiểm tra chưa có các nhãn đó.
 
 **Dữ liệu đánh giá:** dùng nhãn chuẩn công bố của tác giả; Ex02 không dùng dữ liệu tiếng Việt hoặc nhãn do nhóm/LLM tự tạo. Đầu ra `_Intergrationner` và đồ thị tác giả sinh ra là kết quả tham chiếu, không tự trở thành nhãn chuẩn.
 
@@ -52,13 +57,17 @@ Không đánh giá chất lượng.
 - [ ] Từ cấu hình đã đánh giá, ước lượng chi phí cho nhiều bài; xét độ dài bài, số ảnh, khái niệm trùng và kết quả có thể tái sử dụng.
 - [ ] Ghi giả định và phạm vi ước lượng. Ex01 dùng một bài, Ex02 dùng sáu bài; đây vẫn là mẫu nhỏ, cần thêm mẫu đại diện để kết luận chi phí toàn tập.
 
-### Ex03 (tùy chọn): Một số bài học tiếng Việt
+### Ex03: Đồ thị có giúp tác vụ hạ nguồn không
 
-- [ ] Sau mẫu tác giả, thử vài video bài học tiếng Việt, ưu tiên lịch sử (ví dụ 1–3 bài), có phụ đề/văn bản và ảnh hoặc slide nếu có.
-- [ ] Điều chỉnh prompt, tiêu chí chọn khái niệm và nguồn ngoài theo tiếng Việt/lịch sử; ghi thay đổi so với cấu hình SciMKG.
-- [ ] Người hiểu bài học chuẩn bị nhãn khái niệm theo đoạn và duyệt liên kết tài nguyên, giải thích; sau đó đo chất lượng và chi phí như Ex01–Ex02.
+**Mục đích:** bài báo nói đồ thị phục vụ hỏi đáp, sinh câu hỏi và trợ lý học tập, nhưng không đo tác vụ nào.
+Ex03 kiểm tra điều đó trên chính sáu bài của Ex02.
+Thay cho Ex03 cũ (bài học tiếng Việt), quyết định ngày 14/10/2026.
 
-**Đầu ra:** kết luận khả thi trên mẫu nhỏ. Lịch sử đồng thời thay đổi ngôn ngữ và lĩnh vực so với khoa học tự nhiên của SciMKG, nên cần ghi rõ hai thay đổi này.
+- [x] Kiểm tra nguồn câu hỏi trắc nghiệm: C-Eval, CMMLU, E-EVAL, M3Exam cộng lại chỉ có 1 đến 38 câu có đáp án khớp từ khóa mỗi bài, nên bỏ hướng hỏi đáp.
+- [x] Chọn tác vụ tìm đúng đoạn bài giảng: truy vấn là câu trong bài (nguyên văn) và câu hỏi viết lại; đáp án là mốc thời gian có sẵn. Thiết kế: [docs/EX03.md](docs/EX03.md).
+- [x] Mã `experiments/ex03/`, chạy được trên truy vấn nguyên văn với các lượt Ex02 đã xong.
+- [x] Tạo 309 câu hỏi viết lại.
+- [x] Bảng cuối khi đủ 18 lượt Ex02: so `full`/`one-round`/`no-verification`, cách gắn đoạn đầu tiên với mọi đoạn, có và không có A, BM25 và ngẫu nhiên; một run W&B tổng hợp ([ex03-gpt-6-luna](https://wandb.ai/nhinbm-hcmus/SciMKG/runs/krpbt4zl)).
 
 ## Công khai kết quả bằng Weights & Biases
 
