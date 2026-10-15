@@ -90,18 +90,28 @@ class ResourceClient:
         if receipt["status"] != "completed":
             return {"concept": concept, "grounded": False, "status": "missing_or_failed", "receipt": receipt}
         soup = BeautifulSoup(receipt["text"], "html.parser")
-        content = soup.select_one(".mw-parser-output") or soup
+        # A page can hold several .mw-parser-output blocks and the first is often an empty notice,
+        # so take the first block that yields article paragraphs.
         paragraphs = []
-        for paragraph in content.find_all("p"):
-            text = re.sub(r"\[\d+\]", "", paragraph.get_text(" ", strip=True))
-            if len(text) >= 30:
-                paragraphs.append(text)
-            if sum(map(len, paragraphs)) >= 4000:
+        for content in soup.select(".mw-parser-output") or [soup]:
+            paragraphs = article_paragraphs(content)
+            if paragraphs:
                 break
         text = "\n".join(paragraphs)[:4000]
         return {"concept": concept, "grounded": bool(text), "status": "available" if text else "empty",
                 "text": text, "url": receipt["url"], "source_sha256": receipt["sha256"],
                 "collected_at_utc": receipt["collected_at_utc"], "receipt": receipt}
+
+
+def article_paragraphs(content, limit=4000):
+    paragraphs = []
+    for paragraph in content.find_all("p"):
+        text = re.sub(r"\[\d+\]", "", paragraph.get_text(" ", strip=True))
+        if len(text) >= 30:
+            paragraphs.append(text)
+        if sum(map(len, paragraphs)) >= limit:
+            break
+    return paragraphs
 
 
 def parse_prices(html, model="gpt-6-luna"):
